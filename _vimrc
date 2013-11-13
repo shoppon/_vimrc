@@ -35,10 +35,10 @@ if has("win32")
 else
 	set fileencoding=utf-8
 endif
-"è§£å†³èœå•ä¹±ç 
+"½â¾ö²Ëµ¥ÂÒÂë
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
-"è§£å†³consleè¾“å‡ºä¹±ç 
+"½â¾öconsleÊä³öÂÒÂë
 language messages zh_CN.utf-8
 set autochdir
 set nobackup
@@ -55,7 +55,7 @@ set encoding=utf-8
 set fileencodings=utf-8,chinese,latin-1
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
-lcd D:\workspace
+lcd D:\Dropbox\workspace
 set nobackup
 
 "================================
@@ -115,8 +115,27 @@ nnoremap <c-l> <c-w>l
 "==============================
 
 "------------------------------
-"pathogen.vim
-call pathogen#runtime_append_all_bundles()
+"vundle
+set rtp+=D:\Dropbox\Soft\Vim\vim74\bundle\vundle
+call vundle#rc('D:\Dropbox\Soft\Vim\vim74\bundle')
+
+Bundle 'gmarik/vundle'
+Bundle 'flazz/vim-colorschemes'
+Bundle 'mattn/emmet-vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'majutsushi/tagbar'
+Bundle 'maksimr/vim-jsbeautify'
+Bundle 'widox/vim-buffer-explorer-plugin'
+Bundle 'kien/ctrlp.vim'
+Bundle 'tpope/vim-surround'
+Bundle 'vim-scripts/EasyGrep'
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'vim-scripts/YankRing.vim'
+Bundle 'Shougo/neocomplcache.vim'
+Bundle 'shoppon/html5.vim'
+Bundle 'drmingdrmer/xptemplate'
+
 
 "-------------------------------
 "omnicppcomplete
@@ -296,13 +315,13 @@ map <F9> :BufExplorer<CR>
 
 "-------------------------------------------------
 "fullscreen
-" Winå¹³å°ä¸‹çª—å£å…¨å±ç»„ä»¶ gvimfullscreen.dll
-" Alt + Enter å…¨å±åˆ‡æ¢
-" Shift + t é™ä½çª—å£é€æ˜åº¦
-" Shift + y åŠ å¤§çª—å£é€æ˜åº¦
-" Shift + r åˆ‡æ¢Vimæ˜¯å¦æ€»åœ¨æœ€å‰é¢æ˜¾ç¤º
-" Vimå¯åŠ¨çš„æ—¶å€™è‡ªåŠ¨ä½¿ç”¨å½“å‰é¢œè‰²çš„èƒŒæ™¯è‰²ä»¥å»é™¤Vimçš„ç™½è‰²è¾¹æ¡†
-if has('gui_running') && has('gui_win32') && has('libcall')
+" WinÆ½Ì¨ÏÂ´°¿ÚÈ«ÆÁ×é¼ş gvimfullscreen.dll
+" Alt + Enter È«ÆÁÇĞ»»
+" Shift + t ½µµÍ´°¿ÚÍ¸Ã÷¶È
+" Shift + y ¼Ó´ó´°¿ÚÍ¸Ã÷¶È
+" Shift + r ÇĞ»»VimÊÇ·ñ×ÜÔÚ×îÇ°ÃæÏÔÊ¾
+" VimÆô¶¯µÄÊ±ºò×Ô¶¯Ê¹ÓÃµ±Ç°ÑÕÉ«µÄ±³¾°É«ÒÔÈ¥³ıVimµÄ°×É«±ß¿ò
+if has('gui_running') && has('win32') && has('libcall')
     let g:MyVimLib = 'gvimfullscreen.dll'
     function! ToggleFullScreen()
         call libcallnr(g:MyVimLib, 'ToggleFullScreen', 0)
@@ -329,15 +348,15 @@ if has('gui_running') && has('gui_win32') && has('libcall')
         endif
         call libcallnr(g:MyVimLib, 'EnableTopMost', g:VimTopMost)
     endfunction
-    "æ˜ å°„ Alt+Enter åˆ‡æ¢å…¨å±vim
+    "Ó³Éä Alt+Enter ÇĞ»»È«ÆÁvim
     map <F11> <esc>:call ToggleFullScreen()<cr>
-    "åˆ‡æ¢Vimæ˜¯å¦åœ¨æœ€å‰é¢æ˜¾ç¤º
+    "ÇĞ»»VimÊÇ·ñÔÚ×îÇ°ÃæÏÔÊ¾
     nmap <s-r> <esc>:call SwitchVimTopMostMode()<cr>
-    "å¢åŠ Vimçª—ä½“çš„ä¸é€æ˜åº¦
+    "Ôö¼ÓVim´°ÌåµÄ²»Í¸Ã÷¶È
     nmap <a-t> <esc>:call SetAlpha(10)<cr>
-    "å¢åŠ Vimçª—ä½“çš„é€æ˜åº¦
+    "Ôö¼ÓVim´°ÌåµÄÍ¸Ã÷¶È
     nmap <a-y> <esc>:call SetAlpha(-10)<cr>
-    " é»˜è®¤è®¾ç½®é€æ˜
+    " Ä¬ÈÏÉèÖÃÍ¸Ã÷
     autocmd GUIEnter * call libcallnr(g:MyVimLib, 'SetAlpha', g:VimAlpha)
 endif
 
