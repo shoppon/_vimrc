@@ -134,6 +134,7 @@ Bundle 'terryma/vim-multiple-cursors'
 Bundle 'vim-scripts/YankRing.vim'
 Bundle 'Shougo/neocomplcache.vim'
 Bundle 'shoppon/html5.vim'
+Bundle 'ervandew/supertab'
 Bundle 'drmingdrmer/xptemplate'
 
 
@@ -155,6 +156,7 @@ let g:SuperTabMappingForward = '<Plug>supertabKey'
 let g:xptemplate_fallback = '<Plug>supertabKey'
 
 let g:xptemplate_key = '<c-i>'
+let g:xptemplate_brace_complete=1
 
 "----------------------------------------
 "nerd_tree
