@@ -1,33 +1,41 @@
-"=============================
-"   Author -- Shoppon
-"=============================
-
-
-"=============================
-"General Settings
-"=============================
-
+"===============================================================================
+"=======Shoppon=================================================================
+"===============================================================================
+"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+"===============================================================================
+"=======General=================================================================
+"===============================================================================
 set nocompatible
 colo solarized
 autocmd FileType text setlocal textwidth=80  "set the most length of text 
+set mouse=a
 set guioptions-=T
 set guioptions-=m
 set number
 set ruler
 set showcmd
+set showmode
 set incsearch
 set hlsearch
 set laststatus=2
 set showmatch
-set statusline=%f%m%r%h%w%=[%4l][%3p%%][%4L]
-"set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ [%{(&fenc==\"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %c:%l/%L%)
-
+set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ 
+			\[%{(&fenc==\"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %c:%l/%L%)
 syntax on
 filetype on
 filetype plugin on
 filetype indent on
 set guifont=Lucida_Console:h12
-
+language messages zh_CN.utf-8
+"set autochdir
+nmap <leader>e :e $VIM/_vimrc<cr>
+"auto source _vimrc
+autocmd! bufwritepost _vimrc source $VIM/_vimrc
+"===============================================================================
+"=======Files===================================================================
+"===============================================================================
+set encoding=utf-8
 if has("win32")
 	set fileencoding=chinese
 	"fullscreen
@@ -35,32 +43,17 @@ if has("win32")
 else
 	set fileencoding=utf-8
 endif
-"解决菜单乱码
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-"解决consle输出乱码
-language messages zh_CN.utf-8
-set autochdir
-set nobackup
-"auto source _vimrc
-autocmd! bufwritepost _vimrc source $VIM/_vimrc
-
-
-
-"=============================
-"Files Settings
-"=============================
-
-set encoding=utf-8
 set fileencodings=utf-8,chinese,latin-1
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 lcd D:\Dropbox\workspace
 set nobackup
-
-"================================
-"Format Settings
-"================================
+set noswapfile
+set wildignore+=.hg,.git,.svn
+set wildignore+=.metadata
+"===============================================================================
+"=======Format==================================================================
+"===============================================================================
 set cindent
 set smartindent
 set formatoptions=tcrqn
@@ -69,11 +62,14 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set smarttab
-
-"=================================
-"Keymap Settings
-"===============================
-"tab
+"===============================================================================
+"=======Keymap==================================================================
+"===============================================================================
+"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+"-------------------------------------------------------------------------------
+"-------tab---------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 map te :tabnew <CR>
 map tn :tabnext <CR>
 map tp :tabprevious <CR>
@@ -88,105 +84,114 @@ map <a-7> 7gt
 map <a-8> 8gt
 map <a-9> 9gt
 map <a-0> 10gt
-
-"space
+"-------------------------------------------------------------------------------
+"-------fold--------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 set nofen
 set fdl=10
 set foldmethod=indent
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-
-"move
+"-------------------------------------------------------------------------------
+"-------move--------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 imap <c-k> <Up>
 imap <c-j> <Down>
 imap <c-h> <Left>
 imap <c-l> <Right>
-
-"window
+"-------------------------------------------------------------------------------
+"-------window------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 nnoremap <c-h> <c-w>h
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
-
-"complete
-
-
-"==============================
-"Plugin Settings
-"==============================
-
-"------------------------------
-"vundle
+"-------------------------------------------------------------------------------
+"-------leader------------------------------------------------------------------
+"-------------------------------------------------------------------------------
+let mapleader=","
+"===============================================================================
+"=======Plugin==================================================================
+"===============================================================================
+"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+"-------------------------------------------------------------------------------
+"-------vundle------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 set rtp+=D:\Dropbox\Soft\Vim\vim74\bundle\vundle
 call vundle#rc('D:\Dropbox\Soft\Vim\vim74\bundle')
-
 Bundle 'gmarik/vundle'
 Bundle 'flazz/vim-colorschemes'
 Bundle 'mattn/emmet-vim'
+"-------------------------------------------------------------------------------
+"-------nerd_tree---------------------------------------------------------------
+"-------------------------------------------------------------------------------
 Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'majutsushi/tagbar'
-Bundle 'maksimr/vim-jsbeautify'
-Bundle 'widox/vim-buffer-explorer-plugin'
-Bundle 'kien/ctrlp.vim'
-Bundle 'tpope/vim-surround'
-Bundle 'vim-scripts/EasyGrep'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'vim-scripts/YankRing.vim'
-Bundle 'Shougo/neocomplcache.vim'
-Bundle 'shoppon/html5.vim'
-Bundle 'ervandew/supertab'
-Bundle 'drmingdrmer/xptemplate'
-
-
-"-------------------------------
-"omnicppcomplete
-
-"-------------------------------------------------
-"supertab
-let g:SuperTabRetainCompletionType = 2
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>" 
-
-"------------------------------------
-"xptemplate
-let g:xptemplate_vars = "SParg="
-"avoid key conflict
-let g:SuperTabMappingForward = '<Plug>supertabKey'
-
-"if nothing matched in xpt, try supertab
-let g:xptemplate_fallback = '<Plug>supertabKey'
-
-let g:xptemplate_key = '<c-i>'
-let g:xptemplate_brace_complete=1
-
-"----------------------------------------
-"nerd_tree
 map <F3> :NERDTreeToggle<CR>
 imap <F3> :NERDTreeToggle<CR>
 let NERDTreeShowBookmarks=1
-
-"----------------------------------------
-"nerd_commenter
-let mapleader=","
-
-"-------------------------------------------------
-"jsbeautify
-nnoremap <F4> :call g:Jsbeautify()<CR>
-let mapleader=","
-
-"-------------------------------------------------
-"web-indent
-let g:js_indent_log=1
-
-"-------------------------------------------------
-"tagbar
+"-------------------------------------------------------------------------------
+"-------nerd_commenter----------------------------------------------------------
+"-------------------------------------------------------------------------------
+Bundle 'scrooloose/nerdcommenter'
+"-------------------------------------------------------------------------------
+"-------tagbar------------------------------------------------------------------
+"-------------------------------------------------------------------------------
+Bundle 'majutsushi/tagbar'
 nmap <F2> :TagbarToggle<CR>
 let g:tagbar_type_javascript = {
 	\ 'ctagsbin' : 'D:\Program Files\Vim\vim74\bundle\jsctags\jsctags.cmd' 
 \}
-
-"-------------------------------------------------
-"neocomplcache
-"
+"-------------------------------------------------------------------------------
+"------jsbeautify---------------------------------------------------------------
+"-------------------------------------------------------------------------------
+Bundle 'maksimr/vim-jsbeautify'
+nnoremap <F4> :call g:Jsbeautify()<CR>
+"-------------------------------------------------------------------------------
+"------bufexplorer--------------------------------------------------------------
+"-------------------------------------------------------------------------------
+Bundle 'widox/vim-buffer-explorer-plugin'
+map <F9> :BufExplorer<CR>
+"-------------------------------------------------------------------------------
+"-------ctrlp-------------------------------------------------------------------
+"-------------------------------------------------------------------------------
+Bundle 'kien/ctrlp.vim'
+let g:ctrlp_map='<c-p>'
+let g:ctrlp_cmd='CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
+"-------------------------------------------------------------------------------
+"--------surround---------------------------------------------------------------
+"-------------------------------------------------------------------------------
+Bundle 'tpope/vim-surround'
+"-------------------------------------------------------------------------------
+"-------easygrep----------------------------------------------------------------
+"-------------------------------------------------------------------------------
+Bundle 'vim-scripts/EasyGrep'
+map f/ <esc>:Grep 
+"-------------------------------------------------------------------------------
+"-------multiple-cursors--------------------------------------------------------
+"-------------------------------------------------------------------------------
+Bundle 'terryma/vim-multiple-cursors'
+let g:multi_cursor_use_default_mapping=1
+"-------------------------------------------------------------------------------
+"-------yankring----------------------------------------------------------------
+"-------------------------------------------------------------------------------
+Bundle 'vim-scripts/YankRing.vim'
+nnoremap <silent> <F8> :YRShow<CR>
+let g:yankring_max_history = 100
+let g:yankring_dot_repeat_yank = 1
+let g:yankring_replace_n_pkey = '<a-p>'
+let g:yankring_replace_n_nkey = '<a-n>'
+"-------------------------------------------------------------------------------
+"-------neocomplcache-----------------------------------------------------------
+"-------------------------------------------------------------------------------
+Bundle 'Shougo/neocomplcache.vim'
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplcache.
@@ -197,16 +202,13 @@ let g:neocomplcache_enable_quick_match = 1
 " Set minimum syntax keyword length.
 let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
 " Enable heavy features.
 " Use camel case completion.
 "let g:neocomplcache_enable_camel_case_completion = 1
 " Use underbar completion.
 "let g:neocomplcache_enable_underbar_completion = 1
-
 " Define dictionary.
 let g:neocomplcache_dictionary_filetype_lists = {}
-
 " Define keyword.
 if !exists('g:neocomplcache_keyword_patterns')
     let g:neocomplcache_keyword_patterns = {}
@@ -216,7 +218,6 @@ let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 " Plugin key-mappings.
 inoremap <expr><C-g>     neocomplcache#undo_completion()
 inoremap <expr><C-l>     neocomplcache#complete_common_string()
-
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -233,8 +234,8 @@ inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
 " Close popup by <Space>.
-inoremap <expr><space> pumvisible() ? neocomplcache#close_popup() . "\<SPACE>" : "\<SPACE>"
-
+inoremap <expr><space> pumvisible() ? 
+			\neocomplcache#close_popup() . "\<SPACE>" : "\<SPACE>"
 " For cursor moving in insert mode(Not recommended)
 "inoremap <expr><Left>  neocomplcache#close_popup() . "\<Left>"
 "inoremap <expr><Right> neocomplcache#close_popup() . "\<Right>"
@@ -244,23 +245,19 @@ inoremap <expr><space> pumvisible() ? neocomplcache#close_popup() . "\<SPACE>" :
 "let g:neocomplcache_enable_cursor_hold_i = 1
 " Or set this.
 "let g:neocomplcache_enable_insert_char_pre = 1
-
 " AutoComplPop like behavior.
 let g:neocomplcache_enable_auto_select = 0
-
 " Shell like behavior(not recommended).
 "set completeopt+=longest
 "let g:neocomplcache_enable_auto_select = 1
 "let g:neocomplcache_disable_auto_complete = 1
 "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
@@ -268,55 +265,64 @@ endif
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 let g:neocomplcache_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
-
-"multiple cursors
-let g:multi_cursor_use_default_mapping=1
-
-"-------------------------------------------------
-"powerline
-"set guifont=Consolas\ for\ Powerline\ FixedD:h9
-"let g:Powerline_symbols = "fancy"
-"
-"
-
-"-------------------------------------------------
-"ctrlp
-let g:ctrlp_map='<c-p>'
-let g:ctrlp_cmd='CtrlP'
-
-let g:ctrlp_working_path_mode = 'ra'
-
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-
-let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
-
-
-"-------------------------------------------------
-"yankring
-nnoremap <silent> <F8> :YRShow<CR>
-let g:yankring_max_history = 100
-let g:yankring_dot_repeat_yank = 1
-let g:yankring_replace_n_pkey = '<a-p>'
-let g:yankring_replace_n_nkey = '<a-n>'
-
-"-------------------------------------------------
-"bufexplorer
-map <F9> :BufExplorer<CR>
-
-
-
-"-------------------------------------------------
-"fullscreen
+"-------------------------------------------------------------------------------
+"-------html5-------------------------------------------------------------------
+"-------------------------------------------------------------------------------
+Bundle 'shoppon/html5.vim'
+"-------------------------------------------------------------------------------
+"-------supertab----------------------------------------------------------------
+"-------------------------------------------------------------------------------
+Bundle 'ervandew/supertab'
+let g:SuperTabRetainCompletionType = 2
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>" 
+"-------------------------------------------------------------------------------
+"-------xptemplate--------------------------------------------------------------
+"-------------------------------------------------------------------------------
+Bundle 'drmingdrmer/xptemplate'
+let g:xptemplate_vars = "SParg="
+"avoid key conflict
+let g:SuperTabMappingForward = '<Plug>supertabKey'
+"if nothing matched in xpt, try supertab
+let g:xptemplate_fallback = '<Plug>supertabKey'
+let g:xptemplate_key = '<c-i>'
+let g:xptemplate_brace_complete=1
+"-------------------------------------------------------------------------------
+"-------airline-----------------------------------------------------------------
+"-------------------------------------------------------------------------------
+let g:airline#extensions#tabline#enable=1
+Bundle 'bling/vim-airline'
+"-------------------------------------------------------------------------------
+"-------expand-region-----------------------------------------------------------
+"-------------------------------------------------------------------------------
+Bundle 'terryma/vim-expand-region'
+" Default settings. (NOTE: Remove comments in dictionary before sourcing)
+let g:expand_region_text_objects = {
+      \ 'iw'  :0,
+      \ 'iW'  :0,
+      \ 'i"'  :0,
+      \ 'i''' :0,
+      \ 'i]'  :1, 
+      \ 'ib'  :1, 
+      \ 'iB'  :1,
+      \ 'il'  :0,
+      \ 'ip'  :0,
+      \ 'ie'  :0,
+      \ }
+map K <Plug>(expand_region_expand)
+map J <Plug>(expand_region_shrink)
+"-------------------------------------------------------------------------------
+"-------easymotion--------------------------------------------------------------
+"-------------------------------------------------------------------------------
+Bundle 'Lokaltog/vim-easymotion'
+let g:EasyMotion_leader_key = '<Leader><leader>'
+hi link EasyMotionTarget ErrorMsg
+hi link EasyMotionShade  Comment
+"-------------------------------------------------------------------------------
+"-------fullscreen--------------------------------------------------------------
+"-------------------------------------------------------------------------------
 " Win平台下窗口全屏组件 gvimfullscreen.dll
 " Alt + Enter 全屏切换
 " Shift + t 降低窗口透明度
@@ -361,11 +367,9 @@ if has('gui_running') && has('win32') && has('libcall')
     " 默认设置透明
     autocmd GUIEnter * call libcallnr(g:MyVimLib, 'SetAlpha', g:VimAlpha)
 endif
-
-
-"===============================================
-"Compile Settings
-"=============================================
+"===============================================================================
+"=======Compile=================================================================
+"===============================================================================
 func! Compile()
 	exec "w"
 	if &filetype == 'c'
@@ -408,5 +412,4 @@ endfunc
 map <F5> :call Compile()<CR>
 imap <F5> <ESC>:call Compile()<CR>
 vmap <F5> <ESC>:call Compile()<CR>
-
 map <F6> :call Run()<CR>
