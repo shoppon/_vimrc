@@ -18,6 +18,7 @@ set showcmd
 set showmode
 set incsearch
 set hlsearch
+set ignorecase smartcase
 set laststatus=2
 set showmatch
 set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ 
@@ -145,7 +146,11 @@ let g:tagbar_type_javascript = {
 "------jsbeautify---------------------------------------------------------------
 "-------------------------------------------------------------------------------
 Bundle 'maksimr/vim-jsbeautify'
-nnoremap <F4> :call g:Jsbeautify()<CR>
+autocmd FileType javascript noremap <buffer>  <F4> :call JsBeautify()<cr>
+" for html
+autocmd FileType html noremap <buffer> <F4> :call HtmlBeautify()<cr>
+" for css or scss
+autocmd FileType css noremap <buffer> <F4> :call CSSBeautify()<cr>
 "-------------------------------------------------------------------------------
 "------bufexplorer--------------------------------------------------------------
 "-------------------------------------------------------------------------------
@@ -312,7 +317,7 @@ let g:expand_region_text_objects = {
       \ 'ie'  :0,
       \ }
 map K <Plug>(expand_region_expand)
-map J <Plug>(expand_region_shrink)
+map <c-k> <Plug>(expand_region_shrink)
 "-------------------------------------------------------------------------------
 "-------easymotion--------------------------------------------------------------
 "-------------------------------------------------------------------------------
