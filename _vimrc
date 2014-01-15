@@ -44,7 +44,7 @@ if has("win32")
 else
 	set fileencoding=utf-8
 endif
-set fileencodings=utf-8,chinese,latin-1
+set fileencodings=utf-8,gb2312,gbk,latin-1
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 lcd D:\Dropbox\workspace
@@ -89,7 +89,8 @@ map <a-0> 10gt
 "-------fold--------------------------------------------------------------------
 "-------------------------------------------------------------------------------
 set nofen
-set fdl=10
+set fdl=1
+set foldenable
 set foldmethod=indent
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 "-------------------------------------------------------------------------------
@@ -151,6 +152,7 @@ autocmd FileType javascript noremap <buffer>  <F4> :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> <F4> :call HtmlBeautify()<cr>
 " for css or scss
 autocmd FileType css noremap <buffer> <F4> :call CSSBeautify()<cr>
+"let g:config_Beautifier='$Vim/vim-config/.editorconfig'
 "-------------------------------------------------------------------------------
 "------bufexplorer--------------------------------------------------------------
 "-------------------------------------------------------------------------------
@@ -316,7 +318,7 @@ let g:expand_region_text_objects = {
       \ 'ip'  :0,
       \ 'ie'  :0,
       \ }
-map K <Plug>(expand_region_expand)
+map <s-k> <Plug>(expand_region_expand)
 map <c-k> <Plug>(expand_region_shrink)
 "-------------------------------------------------------------------------------
 "-------easymotion--------------------------------------------------------------
